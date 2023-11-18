@@ -1,4 +1,4 @@
-title = "Number Cruncher";
+title = "Number Boss Rush";
 
 description = `
 [Tap]  Zero
@@ -121,7 +121,7 @@ function update() {
 	text(String(playerHitPoints), vec(G.WIDTH/16, G.HEIGHT*9.5/10));
 
 	color("black");
-	text(String(time), vec(G.WIDTH*.90, G.HEIGHT*9.5/10));
+	text(String(time), vec(G.WIDTH*.80, G.HEIGHT*9.5/10));
 
 	//text("Victory", vec(G.WIDTH/3.2, G.HEIGHT/2));
 	//text(String(time), vec(G.WIDTH/2.25, G.HEIGHT/1.7))
@@ -212,7 +212,7 @@ function update() {
 		} else {
 			play("explosion");
 
-			//playerHitPoints--;
+			playerHitPoints--;
 			combo = 1;
 			score = 1;
 			//console.log("YUH OH!");
@@ -221,7 +221,7 @@ function update() {
 		answer = [];
 	}
 	if (timeout <= 0) { // Check if prompt timed out
-		playerHitPoints--;
+		playerHitPoints -= 1;
 		combo = 1;
 		score =1;
 
