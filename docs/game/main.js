@@ -36,6 +36,7 @@ let playerHitPoints;// player hp, if hit zero, player loses
 let bossHitPoints	// boss hp, if hit zero player wins
 let playerAtk		// player damage, when they answer correctly they reduce boss hp by this variable
 let combo			// player combo, everytime the player succeeds up combo score, if they fail reset combo. combo impacts playerAtk
+let time
 
 // difficulty = digits
 function binaryArrayToStr(arr) { // function for printing arrays without commas
@@ -72,6 +73,7 @@ function update() {
 		bossHitPoints = 100;
 		playerAtk = 5;
 		combo = 1;
+		time = 0;
 	}
 	// Gen prompt
 	if (nextQ) {
@@ -117,6 +119,12 @@ function update() {
 	color("green");
 	text("HP", vec(G.WIDTH/16, G.HEIGHT*7/8)); // HP
 	text(String(playerHitPoints), vec(G.WIDTH/16, G.HEIGHT*9.5/10));
+
+	color("black");
+	text(String(time), vec(G.WIDTH*.90, G.HEIGHT*9.5/10));
+
+	//text("Victory", vec(G.WIDTH/3.2, G.HEIGHT/2));
+	//text(String(time), vec(G.WIDTH/2.25, G.HEIGHT/1.7))
 
 	if(playerHitPoints <= 0){
 		end();
@@ -193,13 +201,20 @@ function update() {
 
 			if(bossHitPoints <= 0){
 				end();
+
+				color("black");
+				text("Victory", vec(G.WIDTH/3.5, G.HEIGHT*.75));
+				text(String(time), vec(G.WIDTH/2.25, G.HEIGHT/1.5))
+				
 			}
 			
 			
 		} else {
 			play("explosion");
 
-			playerHitPoints--;
+			//playerHitPoints--;
+			combo = 1;
+			score = 1;
 			//console.log("YUH OH!");
 		}
 		// empty answer
@@ -207,6 +222,8 @@ function update() {
 	}
 	if (timeout <= 0) { // Check if prompt timed out
 		playerHitPoints--;
+		combo = 1;
+		score =1;
 
 		
 		//end();
@@ -214,5 +231,6 @@ function update() {
 		//answer = [];
 	} else {
 		timeout -= 1;
+		time++;
 	}
 }
