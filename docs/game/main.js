@@ -1,4 +1,4 @@
-title = "Number Boss Rush";
+title = "Number Boss Rush!";
 
 description = `
 [Tap]  Zero
